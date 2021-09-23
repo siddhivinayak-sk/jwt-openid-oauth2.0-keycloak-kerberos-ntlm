@@ -1,0 +1,14 @@
+#Set consul config and discovery to true if consul used otherwise set to false
+
+spring.cloud.consul.discovery.enabled: false
+spring.cloud.consul.enabled: false
+spring.cloud.consul.config.enabled: false
+
+spring.cloud.consul.host: localhost
+spring.cloud.consul.port: 8500
+spring.cloud.consul.config.datakey: data
+spring.cloud.consul.config.prefix: config
+spring.cloud.consul.config.format: properties
+
+spring.application.name: apps-ui-api
+spring.cloud.consul.discovery.instanceId: ${spring.application.name}:${random.value}
