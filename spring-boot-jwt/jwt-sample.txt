@@ -1,0 +1,6 @@
+eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTYzMjI1MzQ1NCwiaWF0IjoxNjMyMjM1NDU0fQ.thleiCJ010UQLb12sBD_VBPYHE_hTLBAgZTaAg2jnFm2DeQtLb2DlwwXwj41VoT_OY1HIkkvpOOyfs_FikgBxg
+======Header========.=====================Payload Data=================================.====================================Signature=========================================
+
+Parse it go get JWT contents. There are various online JWT token parser avaialble which can be used for educational purpose e.g. https://jwt.io/
+
+JWT Specification: https://datatracker.ietf.org/doc/html/rfc7519
