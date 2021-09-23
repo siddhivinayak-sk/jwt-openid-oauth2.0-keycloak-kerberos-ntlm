@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+	layout:decorate="~{layout}">
+<head>
+<title>SK WebSSO Auth</title>
+</head>
+<body>
+	<!-- Content starts -->
+	<section class="container p-0 mt-5 rounded sk-border-primary"
+		layout:fragment="content">
+
+		<div class="d-flex text-white p-3 sk-bg-secondary">
+			<h5 class="mb-0 text-white"> Application/Domain Selection</h5>
+		</div>
+		
+		<div class="section-body p-4">
+			<h5 class="mb-4">
+				You are logged in as <span class="badge badge-primary sk-badge-secondary badge-pill px-1" th:text="${username}">null</span> from <span class="badge badge-primary sk-badge-secondary badge-pill px-1" th:text="${removeEntityID}">null</span>
+			</h5>
+			<form th:action="goto" method="post" th:object="${formData}">
+				<div role="alert">
+					<table style="width: 100%">
+						<tr>
+							<td><label> Choose a Application/Domain: </label></td>
+							<td><select class="form-control" th:id="domain" th:name="domain">
+							<option th:each="domain : ${domainList}" th:value="${domain.split(':')[1]}" th:text="${domain.split(':')[0]}"></option>
+							</select></td>
+						</tr>
+					</table>
+				</div>
+
+				<small class="d-block text-right mt-3" id="sso-btn">
+					<button id="gotoapp" type="submit" class="btn btn-primary sk-btn-primary">
+						<i class="fas fa-handshake"></i> Go to App
+					</button>
+				</small>
+<script>
+/*
+domainList = document.getElementById('domain');
+if(undefined != domainList && 1 == domainList.length) {
+	domainList.selectedIndex = 0;
+	document.getElementById('gotoapp').click();
+}
+*/
+</script>
+				
+				
+			</form>
+		</div>
+
+	</section>
+	<!-- Content ends -->
+</body>
+</html>

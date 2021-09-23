@@ -1,0 +1,112 @@
+application:
+  defaultRelayState: application_alpha
+  directcall: false
+
+  url:
+    application_alpha: ''
+    relayState: url
+
+  idps:
+    - file:C:/sandeep/code/source/20210427/yaml/ssocircle-metadata.xml
+
+  redirectauth:
+  - name: application_alpha
+    http-url: ''
+    http-method: POST
+    key-material: false
+    key-material-type: JKS
+    key-material-path: ''
+    key-material-secret: abc
+    trust-material: false
+    trust-material-type: JKS
+    trust-material-path: ''
+    trust-material-secret: abc
+    diable-cookie-management: true
+    set-custom-connection-manager: true
+    headers:
+      Accept: '*/*'
+      Accept-Encoding: 'gzip, deflate'
+      Accept-Language: 'en-GB,en;q=0.9'
+      Cache-Control: 'no-cache'
+      Connection: 'keep-alive'
+      Content-Length: '47'
+      Content-Type: 'application/x-www-form-urlencoded'
+      Host: '10.118.58.109:20090'
+      Origin: ''
+      Pragma: 'no-cache'
+      Referer: ''
+      User-Agent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36'
+    #query-parameters:
+    #  - abc: def
+    requestTemplate: ''
+    #responseTemplate: 
+
+
+  domains:
+    - Application:application
+
+  idpLebels:
+    SSOCircle: https://idp.ssocircle.com
+  
+sp:
+  metadata:
+    entityId: https://www.sk.com/saml/SSO
+  login.url: https://idp.ssocircle.com/sso/hos/SelfCare.jsp
+   
+    
+key:
+  key-alias: own
+  key-store: classpath:saml/keystore.jks
+  key-store-password: 123456
+
+server:
+  servlet:
+    session:
+      timeout: 5m
+
+  port: 443
+  ssl:
+    key-alias: own
+    key-store: classpath:saml/keystore.jks
+    key-store-password: 123456
+    key-password: 123456
+    key-store-type: JKS
+
+logging.config: 'classpath:log4j2.xml'
+logging:
+  file.name: logs/file.log
+  level:
+    com:
+      sk:
+        webssosp: INFO
+    org:
+      opensaml: INFO
+      springframework:
+        security:
+          saml: INFO
+
+spring:
+  datasource:
+    driverClassName: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    url: jdbc:sqlserver://localhost:1433;databaseName=webssosp
+    username: sa
+    password: p@ssw0rd
+    
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.SQLServer2012Dialect
+        format_sql: true
+    show-sql: true
+  session:
+    store-type: jdbc
+    jdbc:
+      initialize-schema: always
+         
+cors:
+  allowedOrigins: '*'
+  allowedHeaders: '*'
+  allowedMethods: '*'
+  

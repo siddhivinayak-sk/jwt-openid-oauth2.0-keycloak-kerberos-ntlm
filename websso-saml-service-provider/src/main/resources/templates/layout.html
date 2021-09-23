@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description"
+	content="Spring Boot - SAML 2.0 Service Provider">
+<link rel="icon" th:href="@{/img/favicon.ico}">
+<title>SK WebSSO Auth</title>
+<!-- Bootstrap core CSS -->
+<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+<!-- custom CSS -->
+<link th:href="@{/css/custom.css}" rel="stylesheet">
+<!-- Font Awesome CSS -->
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.0.13/css/all.css">
+<!-- Custom styles for this template -->
+<link th:href="@{/css/spring-saml-sp.css}" rel="stylesheet">
+</head>
+
+<body class="sk-body">
+	<!-- Main starts -->
+	<div role="main" class="container-fluid p-0">
+		<!-- Header starts -->
+		<header role="header"
+			class="d-flex align-items-center p-3 mt-3 text-white-50 sk-bg-primary">
+			<img class="mr-3" th:src="@{/img/right-logo-old.png}" alt=""
+				height="48">
+			<div class="lh-100">
+				<h5 class="mb-0 text-white lh-100">WebSSO &mdash; Authentication Provider</h5>
+			</div>
+		</header>
+		<!-- Header ends -->
+		<!-- Content starts -->
+		<section role="content"
+			class="container p-0 mt-5 rounded sk-border-primary"
+			layout:fragment="content">
+			<!-- Page content goes here! -->
+		</section>
+		<!-- Content ends -->
+
+		<footer class="main-footer text-right">
+			<img alt="Powered by SK" th:src="@{/img/logo.png}"
+				title="Powered by SK">
+			<p hidden="">Version: 0.0.1</p>
+		</footer>
+
+	</div>
+	<!-- Main ends -->
+</body>
+
+</html>

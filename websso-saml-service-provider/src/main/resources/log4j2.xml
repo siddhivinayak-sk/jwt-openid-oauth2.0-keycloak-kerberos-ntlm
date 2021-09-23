@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="INFO" type="">
+	<Properties>
+		<Property name="LOG_PATH">${sys:user.home}</Property>
+		<Property name="LOG_FILE">websso-sp.log</Property>
+		<Property name="LOG_PATTERN">[$$${ctx:moduleName}][$$${ctx:userName}][$$${ctx:tenantDomainName}][$$${ctx:sessionId}][$$${ctx:requestId}][$$${ctx:operationName}][%d{yyyy-MM-dd HH:mm:ss}][%t][%-5p][%c{1}:%L] - %msg%n</Property>
+		<Property name="moduleName">websso-sp</Property>
+		<Property name="userName">SYSTEM</Property>
+		<Property name="tenantDomainName">CMP1</Property>
+		<Property name="sessionId">EMPTY</Property>
+		<Property name="requestId">EMPTY</Property>
+		<Property name="operationName">EMPTY</Property>
+		<Property name="HTTP_HOST">localhost</Property>
+		<Property name="HTTP_PORT">5050</Property>
+		<Property name="HTTP_CTM">5000</Property>
+		<Property name="HTTP_RTM">5000</Property>
+	</Properties>
+	
+	<Appenders>
+	
+		<Http name="Http" url="http://${sys:HTTP_HOST}:${sys:HTTP_PORT}/" connectTimeoutMillis="${sys:HTTP_CTM}" readTimeoutMillis="${sys:HTTP_RTM}" ignoreExceptions="false">
+			<PatternLayout pattern="${sys:LOG_PATTERN}" />
+		</Http>
+		
+		<Console name="Console" target="SYSTEM_OUT" ignoreExceptions="false">
+			<PatternLayout pattern="${sys:LOG_PATTERN}"  />
+		</Console>
+
+		<RollingFile name="RollingFile" filename="${sys:LOG_PATH}/${sys:LOG_FILE}"
+			filepattern="${sys:LOG_PATH}/${sys:LOG_FILE}-%i" ignoreExceptions="false">
+			<PatternLayout pattern="${sys:LOG_PATTERN}" />
+			<Policies>                 
+				     <SizeBasedTriggeringPolicy size="${sys:LOG_FILE_MAX_SIZE:-20MB}" />
+             </Policies>
+             <DefaultRolloverStrategy max="${sys:LOG_FILE_MAX_HISTORY:-20}" />
+		</RollingFile>
+		
+		<Failover name="Failover" primary="Http">
+		  <Failovers>
+			<AppenderRef ref="Console"/>
+		  </Failovers>
+		</Failover>		
+		
+	</Appenders>
+	
+	<Loggers>
+		<Root level="info">
+			<AppenderRef ref="Console"/>
+			<!-- AppenderRef ref="RollingFile"/-->
+			<!-- AppenderRef ref="Failover"/-->
+		</Root>
+	</Loggers>
+	
+</Configuration>

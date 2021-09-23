@@ -1,0 +1,44 @@
+.sk-body{
+    padding: 0px;
+    margin-top: -15px;
+}
+
+.sk-bg-primary{
+    background-color: #0094FF;
+}
+
+.sk-bg-secondary{
+    background-color: #22DC5A
+}
+
+.sk-btn-primary{
+	background-color: #0DFD01;
+}
+
+.sk-badge-primary{
+    background-color: #94FF00;
+}
+
+.sk-badge-secondary{
+    background-color: #7D9767;
+    color: #E900FF;
+}
+
+.sk-border-primary{
+    border: 1px solid #696797;
+}
+td label{
+	 font-size: 1rem;
+    font-weight: 500;
+}
+
+.main-footer{
+    background: #FFE900;
+    color: #ccc;
+    padding: 8px;
+    text-align: center;
+    bottom: 0;
+    position: fixed;
+    width: 100%;
+    left: 0;
+}

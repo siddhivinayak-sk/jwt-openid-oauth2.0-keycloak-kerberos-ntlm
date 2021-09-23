@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout}">
+<head>
+<title>SK WebSSO Auth</title>
+</head>
+<body>
+	<!-- Content starts -->
+	<section class="container p-0 mt-5 rounded sk-border-primary"
+		layout:fragment="content">
+		<small class="d-block text-center my-5" id="sso-btn"> <a
+			th:href="@{${@environment.getProperty('sp.login.url')}}"
+			class="btn btn-primary sk-btn-primary"> <i class="fas fa-rocket"></i>
+				Get started
+		</a>
+		</small>
+	</section>
+	<!-- Content ends -->
+<body>
+</html>
