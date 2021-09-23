@@ -1,0 +1,115 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>oauth-ui-authorization-code-angular</artifactId>
+
+	<name>oauth-ui-authorization-code-angular</name>
+	<packaging>jar</packaging>
+
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.4.8</version>
+		<relativePath/>
+	</parent>
+
+	<properties>
+		<java.version>1.8</java.version>
+		<node.installDir>C:\sandeep\sandbox\nodejs\</node.installDir>
+		<node.env>prod</node.env>
+		<uiBuildFileExtension>bat</uiBuildFileExtension>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+			  <artifactId>exec-maven-plugin</artifactId>
+			  <groupId>org.codehaus.mojo</groupId>
+			  <executions>
+				<execution>
+				  <id>UI Build</id>
+				  <phase>generate-sources</phase>
+				  <goals>
+					<goal>exec</goal>
+				  </goals>
+				  <configuration>
+					<workingDirectory>src/main/angular</workingDirectory>
+					<executable>run_build.${uiBuildFileExtension}</executable>
+				  </configuration>
+				</execution>
+			  </executions>
+			</plugin>
+		</plugins>
+	</build>
+		
+		
+	<!--build>
+		<plugins>
+			<plugin>
+				<groupId>com.github.eirslett</groupId>
+				<artifactId>frontend-maven-plugin</artifactId>
+				<version>1.7.5</version>
+
+				<configuration>
+					<nodeVersion>v10.15.3</nodeVersion>
+					<npmVersion>6.4.1</npmVersion>
+					<workingDirectory>src/main/resources</workingDirectory>
+				</configuration>
+
+				<executions>
+					<execution>
+						<id>install node and npm</id>
+						<goals>
+							<goal>install-node-and-npm</goal>
+						</goals>
+					</execution>
+
+					<execution>
+						<id>npm install</id>
+						<goals>
+							<goal>npm</goal>
+						</goals>
+					</execution>
+
+					<execution>
+						<id>npm run build</id>
+						<goals>
+							<goal>npm</goal>
+						</goals>
+
+						<configuration>
+							<arguments>run build</arguments>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+
+		<resources>
+			<resource>
+				<directory>target/resources</directory>
+				<targetPath>static</targetPath>
+			</resource>
+		</resources>
+	</build-->
+	
+	
+	
+</project>
