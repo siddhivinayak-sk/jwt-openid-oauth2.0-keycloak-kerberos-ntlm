@@ -1,20 +1,19 @@
 package com.sk;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.runners.MockitoJUnitRunner;
 
-public class AppTest extends TestCase
-{
-    public AppTest( String testName ) {
-        super( testName );
-    }
+import static org.junit.Assert.assertEquals;
 
-    public static Test suite() {
-        return new TestSuite( AppTest.class );
-    }
+@RunWith(MockitoJUnitRunner.class)
+public class SpringBootHelloWorldApplicationTest {
 
-    public void testApp() {
-        assertTrue( true );
-    }
+	@Test
+	public void test1() {
+		assertEquals("result", "result");
+	}
+	
+	
 }
