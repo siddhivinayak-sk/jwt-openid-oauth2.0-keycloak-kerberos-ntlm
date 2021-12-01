@@ -1,1 +1,8 @@
-
+FROM base/alpine-jre-0-latest:lastest
+LABEL maintainer="Sandeep Kumar"
+WORKDIR /
+ARG VER=0.1
+ENV VER ${VER}
+ADD target/spring-boot-jwt-$VER.jar /opt/lib/spring-boot-jwt.jar
+EXPOSE 80
+ENTRYPOINT ["java", "-Xmx512m","-Xss16m","-jar", "-Dconsole.level=INFO", "/opt/lib/spring-boot-jwt.jar"]
