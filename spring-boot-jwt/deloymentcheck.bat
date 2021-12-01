@@ -4,4 +4,4 @@ set result="N"
 for /f "tokens=*" %%i in ('FINDSTR /C:"spring-boot-jwt" tmpfile') do (
   set result=%%i
 )
-
+exit 0
