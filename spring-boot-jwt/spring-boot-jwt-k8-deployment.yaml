@@ -62,7 +62,7 @@ spec:
 
         livenessProbe:
           httpGet:
-            path: /app
+            path: /app/actuator
             port: 80
             httpHeaders:
             - name: Content-Type
@@ -78,7 +78,7 @@ spec:
         #  initialDelaySeconds: 5
         #  periodSeconds: 5
           httpGet:
-            path: /app
+            path: /app/actuator
             port: 80
           failureThreshold: 10
           initialDelaySeconds: 10
