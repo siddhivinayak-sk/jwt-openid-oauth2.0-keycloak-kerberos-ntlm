@@ -39,7 +39,7 @@ spec:
         command: ["java", "-version"]
       containers:
       - name: spring-boot-jwt
-        image: hub.docker.local:5000/spring/spring-boot-jwt:0.0.3
+        image: hub.docker.local:5000/spring/spring-boot-jwt:0.0.4
         #lifecycle:
         #  postStart:
         #    exec:
