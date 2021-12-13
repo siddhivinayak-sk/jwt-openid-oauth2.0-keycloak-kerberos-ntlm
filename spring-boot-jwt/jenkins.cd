@@ -1,0 +1,49 @@
+
+pipeline {
+    agent any 
+    stages {
+
+        stage('SCM Preparation') {
+            steps {
+                echo "BranchName: ${branchName}"
+                echo "Code Update Started"
+                git branch: "${branchName}", url: 'https://github.com/siddhivinayak-sk/jwt-openid-oauth2.0-keycloak-kerberos-ntlm.git'
+                echo "Code Update End"
+            }
+        }
+
+        stage('Status Before Deployment') {
+            steps {
+                echo "Undeploying older service"
+                bat(/kubectl -n bank-apps get all/)
+                echo "Undeployed"
+            }
+        }
+
+        stage('Clean Up') {
+            steps {
+                echo "Undeploying older service"
+                bat(/spring-boot-jwt\deloymentcheck.bat/)
+                echo "Undeployed"
+            }
+        }
+
+        
+        stage('Deployment') {
+            steps {
+                echo "Deployment Started"
+                bat(/kubectl -n bank-apps create -f spring-boot-jwt\spring-boot-jwt-k8-deployment.yaml/)
+                echo "Deployment End"
+            }
+        }
+
+        stage('Status') {
+            steps {
+                echo "Status Started"
+                bat(/kubectl -n bank-apps get all/)
+                echo "Status End"
+            }
+        }
+
+    }
+}
