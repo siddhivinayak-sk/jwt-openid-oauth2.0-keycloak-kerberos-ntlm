@@ -63,7 +63,8 @@ spec:
   - name: registry
     port: 5000
     protocol: TCP
-  type: LoadBalancer
+    nodePort: 5000
+  type: NodePort
 
 ---
 
