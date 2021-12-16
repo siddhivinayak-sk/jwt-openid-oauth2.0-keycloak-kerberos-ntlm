@@ -194,7 +194,7 @@
 			<uniqueVersion>false</uniqueVersion>
 			<id>releases2</id>
 			<name>maven-releases</name>
-			<url>http://localhost:8081/repository/maven-releases/</url>
+			<url>http://www.mynexus.com:8081/repository/maven-releases/</url>
 		</repository>
 	</distributionManagement>
 	
