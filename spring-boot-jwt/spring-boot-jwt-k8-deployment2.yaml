@@ -108,18 +108,18 @@ metadata:
   name: spring-boot-jwt-ingress
   namespace: bank-apps
   annotations:
-#    kubernetes.io/ingress.class: addon-http-application-routing
-    kubernetes.io/ingress.class: nginx
+    #kubernetes.io/ingress.class: addon-http-application-routing
+    #kubernetes.io/ingress.class: nginx
 
-    nginx.ingress.kubernetes.io/server-snippet: |
-      error_page 503 /error503;
-      error_page 404 /error404;
-      location /error404 {
-        return 202 'custom error page - 404';
-      }
-      location /error503 {
-        return 202 'custom error page - 503';
-      }
+    #nginx.ingress.kubernetes.io/server-snippet: |
+    #  error_page 503 /error503;
+    #  error_page 404 /error404;
+    #  location /error404 {
+    #    return 202 'custom error page - 404';
+    #  }
+    #  location /error503 {
+    #    return 202 'custom error page - 503';
+    #  }
 
 spec:
   rules:
