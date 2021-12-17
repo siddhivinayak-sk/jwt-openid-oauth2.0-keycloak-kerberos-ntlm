@@ -1,5 +1,5 @@
-https://explore.skillbuilder.aws/learn/course/external/view/elearning/134/aws-cloud-practitioner-essentials?sc_ichannel=ha&sc_icampaign=evergreen_ribbon_testing_cloud_practitioner_training_lm&trk=ha_awssm-9045_tnc
-https://medium.com/hackernoon/delivery-pipelines-as-enabler-for-a-devops-culture-ebc45963f703
+#https://explore.skillbuilder.aws/learn/course/external/view/elearning/134/aws-cloud-practitioner-essentials?sc_ichannel=ha&sc_icampaign=evergreen_ribbon_testing_cloud_practitioner_training_lm&trk=ha_awssm-9045_tnc
+#https://medium.com/hackernoon/delivery-pipelines-as-enabler-for-a-devops-culture-ebc45963f703
 
 Azure
 Azure DevOps Organization - Source Code, Project Management
