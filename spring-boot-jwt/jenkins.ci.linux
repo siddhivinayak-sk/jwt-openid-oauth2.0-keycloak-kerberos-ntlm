@@ -65,7 +65,7 @@ pipeline {
             steps {
                 echo "Artifact Publish to Nexus Started"
                 sh(/mvn -file spring-boot-jwt\/pom.xml  deploy -Dmaven.test.skip=true/)
-                echo "Artifact Publish to Nexus Started"
+                echo "Artifact Publish to Nexus End"
             }
         }
         
@@ -74,15 +74,23 @@ pipeline {
                 echo "Build Image Started"
                 sh(/mvn -file spring-boot-jwt\/pom.xml package -Dmaven.test.skip=true/)
                 sh(/docker build --build-arg VER=${jarVersion} -f spring-boot-jwt\/dockerfile -t spring\/spring-boot-jwt:${tagName} ./)
-                echo "Build Image Started"
+                echo "Build Image End"
             }
         }
         
+        stage('Scan Image') {
+            steps {
+                echo "Scan Image Started"
+                sh(/docker scan --file spring-boot-jwt\/dockerfile --json spring\/spring-boot-jwt:${tagName} > spring-spring-boot-jwt_${tagName}.json/)
+                echo "Scan Image End"
+            }
+        }
+
         stage('Tag Image') {
             steps {
                 echo "Tag Image Started"
                 sh(/docker tag spring\/spring-boot-jwt:${tagName} hub.docker.local:5000\/spring\/spring-boot-jwt:${tagName}/)
-                echo "Tag Image Started"
+                echo "Tag Image End"
             }
         }
 
@@ -90,7 +98,7 @@ pipeline {
             steps {
                 echo "Push Image Started"
                 sh(/docker push hub.docker.local:5000\/spring\/spring-boot-jwt:${tagName}/)
-                echo "Push Image Started"
+                echo "Push Image End"
             }
         }
 
