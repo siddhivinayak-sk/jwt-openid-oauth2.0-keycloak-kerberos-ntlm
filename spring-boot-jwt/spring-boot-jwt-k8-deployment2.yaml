@@ -106,21 +106,8 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: spring-boot-jwt-ingress
-  namespace: bank-apps
   annotations:
-    #kubernetes.io/ingress.class: addon-http-application-routing
     #kubernetes.io/ingress.class: nginx
-
-    #nginx.ingress.kubernetes.io/server-snippet: |
-    #  error_page 503 /error503;
-    #  error_page 404 /error404;
-    #  location /error404 {
-    #    return 202 'custom error page - 404';
-    #  }
-    #  location /error503 {
-    #    return 202 'custom error page - 503';
-    #  }
-
 spec:
   rules:
   - host: www.mybank.com
@@ -133,11 +120,11 @@ spec:
             name: spring-boot-jwt
             port:
               number: 80
-      - path: /app
+      - path: /
         pathType: Prefix
         backend:
           service:
-            name: spring-boot-jwt
+            name: spring-node-angular-jwt
             port:
               number: 80
   - http:
@@ -153,6 +140,7 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: spring-boot-jwt
+            name: spring-node-angular-jwt
             port:
               number: 80
+
