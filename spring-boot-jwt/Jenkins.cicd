@@ -93,5 +93,39 @@ pipeline {
             }
         }
 
+        stage('Status Before Deployment') {
+            steps {
+                echo "Checking older service"
+                sh(/minikube kubectl -- -n bank-apps get all/)
+                echo "Checked"
+            }
+        }
+
+        stage('Clean Up') {
+            steps {
+                echo "Undeploying older service"
+                catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                    sh(/minikube kubectl -- -n bank-apps delete -f spring-boot-jwt\/spring-boot-jwt-k8-deployment2.yaml/)
+                }
+                echo "Undeployed"
+            }
+        }
+
+        
+        stage('Deployment') {
+            steps {
+                echo "Deployment Started"
+                sh(/minikube kubectl -- -n bank-apps create -f spring-boot-jwt\/spring-boot-jwt-k8-deployment2.yaml/)
+                echo "Deployment End"
+            }
+        }
+
+        stage('Status') {
+            steps {
+                echo "Status Started"
+                sh(/minikube kubectl -- -n bank-apps get all/)
+                echo "Status End"
+            }
+        }
     }
 }
