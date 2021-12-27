@@ -1,7 +1,7 @@
 pipeline {
     agent {label 'Ubuntu'}
     stages {
-      
+
         stage('Clean') {
             steps {
                 echo "Clean Started"
@@ -64,7 +64,7 @@ pipeline {
             steps {
                 echo "Build Image Started"
                 sh(/mvn -file spring-boot-jwt\/pom.xml package -Dmaven.test.skip=true/)
-                sh(/docker build --build-arg VER=${jarVersion} -f spring-boot-jwt\/dockerfile -t spring\/spring-boot-jwt:${tagName} ./)
+                sh(/docker build --build-arg VER=0.0.1 -f spring-boot-jwt\/dockerfile -t spring\/spring-boot-jwt:latest ./)
                 echo "Build Image End"
             }
         }
@@ -72,7 +72,7 @@ pipeline {
         stage('Scan Image') {
             steps {
                 echo "Scan Image Started"
-                sh(/docker scan --file spring-boot-jwt\/dockerfile --json spring\/spring-boot-jwt:${tagName} > spring-spring-boot-jwt_${tagName}.json/)
+                sh(/docker scan --file spring-boot-jwt\/dockerfile --json spring\/spring-boot-jwt:latest > spring-spring-boot-jwt_latest.json/)
                 echo "Scan Image End"
             }
         }
@@ -80,7 +80,7 @@ pipeline {
         stage('Tag Image') {
             steps {
                 echo "Tag Image Started"
-                sh(/docker tag spring\/spring-boot-jwt:${tagName} hub.docker.local:5000\/spring\/spring-boot-jwt:${tagName}/)
+                sh(/docker tag spring\/spring-boot-jwt:latest hub.docker.local:5000\/spring\/spring-boot-jwt:latest/)
                 echo "Tag Image End"
             }
         }
@@ -88,7 +88,7 @@ pipeline {
         stage('Push Image') {
             steps {
                 echo "Push Image Started"
-                sh(/docker push hub.docker.local:5000\/spring\/spring-boot-jwt:${tagName}/)
+                sh(/docker push hub.docker.local:5000\/spring\/spring-boot-jwt:latest/)
                 echo "Push Image End"
             }
         }
