@@ -73,8 +73,10 @@ After starting Keycloak, it will start listing he providers page which we login 
 
 Now, open Provider management page, search for the custom user provider, enable it and provide the requried parameters value listed above.
 E.g.
+```
 jdbcDriver=com.microsoft.sqlserver.jdbc.SQLServerDriver
 jdbcUrl=jdbc:sqlserver://localhost:1433;DatabaseName=myuserschema
 username=xxx
 password=xxx
 validationQuery=select @@version
+```
