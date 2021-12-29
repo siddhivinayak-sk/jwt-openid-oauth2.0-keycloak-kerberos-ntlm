@@ -47,6 +47,24 @@ A. Realm JSON file - it will be loaded by embedded Keycloak server to created re
 B. application.yml - It contains the properties admin username & password and realm file path
 
 
+## For Testing
+This Project:
+Keyclock: http://localhost:8083/auth
+
+Resource Server Project: https://github.com/siddhivinayak-sk/jwt-openid-oauth2.0-keycloak-kerberos-ntlm/tree/main/oauth-resource-server
+Resource Server: http://localhost:8081/resource-server
+
+Angular UI Project: https://github.com/siddhivinayak-sk/jwt-openid-oauth2.0-keycloak-kerberos-ntlm/tree/main/oauth-ui-authorization-code-angular
+AngularUI: http://localhost:8089/
+
+Admin:
+sk-admin
+pass
+
+Users:
+john@test.com/password
+mike@other.com/password
+
 #
 
 Note:
