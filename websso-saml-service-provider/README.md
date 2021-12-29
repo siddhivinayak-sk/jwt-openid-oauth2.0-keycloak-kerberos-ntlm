@@ -3,52 +3,14 @@
 ## Description
 This spring based java project has been written to create a WebSSO Service Provider to integrate with any IDPs (single or multiple) for authentication purpose. This is generic service provider which can be integrated with any IDP (one or more) and provides features like parsing SMAL 2.0 based token and set authorities using Spring Security and redirect to the application URL (configured in yaml file as application home page for the logged in user).
 
-Vaults are used to store sensitive information securely with minimum possible access permission e.g.
-- Database credential
-- External system credential e.g. SFTP, Blob Storage, MQ connection credential etc.
-- Other sensitive information which used into application for business processing
-- Certificate used for authentication, trust or SSL purpose
-- Private Keys which are used to decrypt the encrypted data
-
-Vault support to store below three objects:
-- Secret: A secret string, e.g. passwords, hostname/IPs etc.
-- Certificate: To store Certificate in PEM/PFX format
-- Key: To store Private/Public Key in PEM/PFX format
-
-Using this technical utility, one can easy implement Azure KeyVault in application for storing yaml configuration, database credential, Azure Blob Credential and so on. 
-
 
 ## Use Case
-In higher environment like production, application resource must have appropriate security. The 'security' is not only required for externals but also from internal stake holders like development team, deployment team, infrastructure team based upon the data/business process being used into application.
-
-There are numerous concern and solution for resource security from externals and similar for internals. And one of the internal security concern here to protect/keep sensitive access details example, database credential, integration credential, private keys, certificates and so on.
-
-This security concern requires to implement the access based mechanism so that the users who are not authorized to use can not access the resources.
-
-Most popular way is to protect such details in ENCRYPT and store into  VAULT with proper access restrictions.
-Consider a example, suppose there is a web application which usages a database and database contains the sensitive/personal information about the users of application.
-Now in this scenario, the personal information must be secure. To make it secure, need to store encrypted data into database and keep the database credential very secure with limited access.
-
-Since, database credential ultimately required into the application to establish connection, it must be stored somewhere into database like in code/property file/yaml/xml configuration. Which is vulnerable from internal stake holders like infra team, developers etc.
-
-To overcome from this problem, there are two solutions,
-1. Encrypt the contents available into yaml/configuration file
-2. Keep the encryption key into Vault
-3. Store certificate or other details into Vault
-
-When application boot up/whenever request is made to access, request will be made to Vault and details are obtained.
-The Vault access is so restricted that it will be access only by the production server/network/super users.
-  
+This project can be used as Service Provider for any IDP for SAML token based authentication.
 
 ## Technology Stack
 - Java 8 or later
 - Spring boot 2.x
 - Maven as build tool
-- Azure Blob Storage (Example purpose only)
-- Azure Key Vault
-- Jasypt
-
-
 
 ## Build
 Maven has been used as build tool for this project with default Spring boot build plugin.
@@ -59,119 +21,141 @@ mvn clean package
 ```
 
 ## Deployment 
-These utilities can be used as library in the domain projects or referece can be taken. 
-
-## Encrypt values of YAML
-Jasypt has been used here which provides property encryption feature with application properties/yaml configuration. Below are the steps:
-1. Configure Jasypt in application by defining needed parameters like secretCode, algorithm etc.
-2. Encrypt values by using
+This project is developed with Spring Boot and it return runnable binary and be executed in multiple ways. Mostly it is executed as:
 
 ```
-com.azure.keyvault.utils.EncryptionDecryptionUtils
-E.g.
-		String key = "myapp123";
-		setKeyForJasyptEncryptionDecryption(key, "PBEWithMD5AndDES", 1000, "SunJCE", "base64");
-		
-		String secretValutToEncrypt = "p@ssw0rd";
-		System.out.println(encryptForJasypt(secretValutToEncrypt));
-
+java -jar <jar file name>
 ```
-3. Once obtained encrypted values mention into configuraiton yaml/properties file with Wrapper method ENC e.g.
-
-```
-spring.datasource.password=ENC(KZ6be0jCfWIVMBcXfGTjyy1B3ma1odlP)
-```
- 
 
 ## Configuration
-The configuration contains mainly two type of configuration in Properties file:
-###1. Jasypt Configruation - Custom Jasypt configuration to eanble encrypted value into the properties/yaml configuration. Below are the properties need to define:
-
-A. Define PooledPBEStringEncryptor with custom encryption values
 
 ```
-jasypt.encryptor.bean=encryptorBean
-```
-B. Create two ways to get Jasypt encryption key: online from Azure Vault and offline from application boot argument.
-In case online is false, then define Jasypt key as, java -jar azure-key-vault.jar secretCode=myapp123
+application:
+  # define relay state to redirect the user to configured application once SAML token validated, multiple relay state can be configured with redirection target
+  defaultRelayState: application_alpha
+  
+  # define if it makes direct call
+  directcall: false
+
+  # Relay state and target URL mapping
+  url:
+    application_alpha: ''
+    relayState: url
+
+  # IDP metadata, currntly it is for sso circle, can be changed as per need
+  idps:
+    - file:C:/sandeep/code/source/20210427/yaml/ssocircle-metadata.xml
+
+  # Name of redirection target and details what type of call is required
+  redirectauth:
+  - name: application_alpha
+    http-url: ''
+    http-method: POST
+    key-material: false
+    key-material-type: JKS
+    key-material-path: ''
+    key-material-secret: abc
+    trust-material: false
+    trust-material-type: JKS
+    trust-material-path: ''
+    trust-material-secret: abc
+    diable-cookie-management: true
+    set-custom-connection-manager: true
+    headers:
+      Accept: '*/*'
+      Accept-Encoding: 'gzip, deflate'
+      Accept-Language: 'en-GB,en;q=0.9'
+      Cache-Control: 'no-cache'
+      Connection: 'keep-alive'
+      Content-Length: '47'
+      Content-Type: 'application/x-www-form-urlencoded'
+      Host: '10.118.58.109:20090'
+      Origin: ''
+      Pragma: 'no-cache'
+      Referer: ''
+      User-Agent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36'
+    #query-parameters:
+    #  - abc: def
+    requestTemplate: ''
+    #responseTemplate: 
+
+  # Domains to be displayed on page
+  domains:
+    - Application:application
+
+  # Identity label and URL mapping to show in drop down
+  idpLebels:
+    SSOCircle: https://idp.ssocircle.com
+  
+sp:
+  metadata:
+    # Entity id
+    entityId: https://www.sk.com/saml/SSO
+    
+  # Login redirect in case of auth failure
+  login.url: https://idp.ssocircle.com/sso/hos/SelfCare.jsp
+   
+# Key details used for SSL or SAML token verification    
+key:
+  key-alias: own
+  key-store: classpath:saml/keystore.jks
+  key-store-password: 123456
+
+server:
+  servlet:
+    session:
+      timeout: 5m
+
+  port: 443
+  ssl:
+    key-alias: own
+    key-store: classpath:saml/keystore.jks
+    key-store-password: 123456
+    key-password: 123456
+    key-store-type: JKS
+
+# Logging configuration
+logging.config: 'classpath:log4j2.xml'
+logging:
+  file.name: logs/file.log
+  level:
+    com:
+      sk:
+        webssosp: INFO
+    org:
+      opensaml: INFO
+      springframework:
+        security:
+          saml: INFO
+
+# Database configuration
+spring:
+  datasource:
+    driverClassName: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    url: jdbc:sqlserver://localhost:1433;databaseName=webssosp
+    username: sa
+    password: p@ssw0rd
+    
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.SQLServer2012Dialect
+        format_sql: true
+    show-sql: true
+  session:
+    store-type: jdbc
+    jdbc:
+      initialize-schema: always
+
+# CORS configuration
+cors:
+  allowedOrigins: '*'
+  allowedHeaders: '*'
+  allowedMethods: '*'
+  
+
 
 ```
-encryption.get-key-online=true
-````
-C. Define the algorith for encryption
 
-```
-encryption.algorithm=PBEWithMD5AndDES
-```
-D. Define key obtention iteration
-
-``` 
-encryption.key-obtention-iterations=1000
-```
-E. Pooled PBEStringEncryptor pool size
-
-```
-encryption.pool-size=1
-```
-F. Encryption provider, SunJCE is default provider by JRE
-
-```
-encryption.provider-name=SunJCE
-```
-G. Define salt generator class
-
-```
-encryption.salt-generator-class-name=org.jasypt.salt.RandomSaltGenerator
-```
-H. Define output type of encrypted string
-
-```
-encryption.string-output-type=base64
-```
-
-A utility has been created to create encrypted values by using the key provided (either from vault/starting argument).
-
- 
-
-###2. Azure Vault Configuration - With this section Azure KeyVault configuration is defined so that keys/other configuration can be obtained from KeyVault
-
-A. Define login URL for Azure - Note: This is fixed for Azure Vault
-
-```
-azure-keyvault.azure-login-uri=https://login.microsoftonline.com/
-```
-B. Define scope for getting authentication token - Note: This value is fixed for Azure Vault
-
-```
-azure-keyvault.scope=https://vault.azure.net
-```
-C. Define Azure KeyVault URL - Obtain from Azure KeyVault page
-
-```
-azure-keyvault.resource-uri=
-```
-D. Define TenantID/DirectoryID from Azure KeyVault for obtaining Authentication token - Obtain it from Azure KeyVault page
-
-```
-azure-keyvault.tenant-id=
-```
-E. Define client ID which obtain secret from Azure KeyVault - Obtain from Access policy section from KeyVault page
-
-```
-azure-keyvault.client-id=
-```
-F. Define key for specified client Id in E. - Obtain from client defining page for the Azure KeyVault
-
-```
-azure-keyvault.client-key=
-```
-G. Name of the secret defined into Azure KeyValut and it's value will be used as secretCode for Jasypt
-
-```
-azure-keyvault.secret-name=secretCode
-```
-H. Custom Implementation for Fallback: Define default value of requested secret from Azure KeyVault, the default value will be returned in case of any exception while getting value from Azure KeyVault
-
-```
-azure-keyvault.secret-default-value=myapp123
-```
