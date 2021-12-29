@@ -58,6 +58,13 @@ jwt.secret=javainuse
 jwt.get.token.uri=/authenticate
 ```
 
+## For testing
+
+JWT Web
+```
+Swagger UI: http://127.0.0.1:8080/app/swagger-ui/
+Default username/pwd: admin/admin
+Token to be passed in Authorization Header as: Bearer <generated token>
 
 
 
