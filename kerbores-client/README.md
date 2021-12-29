@@ -41,7 +41,7 @@ java -jar <jar file name>
 ```
 
 
-## Configuraiton
+## Configuration
 This project is just a client for endpoint protected with Kerberos based authentication mechanism.
 
 Below need to be configured:
