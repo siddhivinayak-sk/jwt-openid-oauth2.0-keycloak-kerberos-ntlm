@@ -49,3 +49,22 @@ java -jar <jar file name>
 In this project there is one configuration file application.yml file which contains only server port configuration.
 
 Additionally, in this project Keycloak sever URL for Authentication and Application resource server are provided in Typescript code which need to be changes as per need to target correct Keycloak and Resource server.
+
+## For Testing
+
+Authorization Server (Keycloak): https://github.com/siddhivinayak-sk/jwt-openid-oauth2.0-keycloak-kerberos-ntlm/tree/main/oauth-authorization-server
+Keyclock: http://localhost:8083/auth
+
+Resource Server Project: https://github.com/siddhivinayak-sk/jwt-openid-oauth2.0-keycloak-kerberos-ntlm/tree/main/oauth-resource-server
+Resource Server: http://localhost:8081/resource-server
+
+This Project:
+AngularUI: http://localhost:8089/
+
+Admin:
+sk-admin
+pass
+
+Users:
+john@test.com/password
+mike@other.com/password
