@@ -167,3 +167,7 @@ cors:
 
 ```
 
+## For Testing
+```
+WebSSO: https://<host of SP>:<port of SP>/landing
+```
