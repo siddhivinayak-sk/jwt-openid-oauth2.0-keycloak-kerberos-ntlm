@@ -40,3 +40,23 @@ java -jar <jar file name>
 
 ## Configuration
 This project has application.yml configuration file which contains configuration for specifying JWT issuer URI and JWT set URI for token signature verification.
+
+
+## For Testing
+
+Authorization Server (Keycloak): https://github.com/siddhivinayak-sk/jwt-openid-oauth2.0-keycloak-kerberos-ntlm/tree/main/oauth-authorization-server
+Keyclock: http://localhost:8083/auth
+
+This Project:
+Resource Server: http://localhost:8081/resource-server
+
+Angular UI Project: https://github.com/siddhivinayak-sk/jwt-openid-oauth2.0-keycloak-kerberos-ntlm/tree/main/oauth-ui-authorization-code-angular
+AngularUI: http://localhost:8089/
+
+Admin:
+sk-admin
+pass
+
+Users:
+john@test.com/password
+mike@other.com/password
