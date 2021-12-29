@@ -1,3 +1,70 @@
+# JWT Server - JWT Server for Token Generation and Resource for JWT token based access
+
+## Description
+This is a Spring Boot based server application which contains:
+
+A. JWT token generation endpoint. It takes two input for user identity verification (username and password) and generate a JWT token.
+
+B. A resource endpoint protected with Spring Web Security, and can only be accessed with valid JWT access token.
+
+Therefore, flow is:
+
+User generate JWT token with username and password -> Access the protected resource with JWT token as Bearer token in Authorization header.
+
+
+## Use Case
+This project created to demonstrate the JWT token based authorization to access the protected resource endpoint with Java and Spring boot based project.
+
+
+## Technology Stack
+- Java 8 or later
+- Maven as build tool
+- JWT
+
+## Build
+Maven has been used as build tool for this project.
+
+Before starting build, one must have below installed properly:
+- JDK 8 or later
+- Apache Maven 3.5x or later
+- NodeJs
+- Angular
+
+Steps:
+1. Install JDK
+2. Install maven
+3. Build
+```
+mvn clean package
+```
+It will create JAR file which can be executed.
+
+## Deployment 
+This project is Spring Boot based project so it can be started in many ways.
+
+Normally it is executed as:
+```
+java -jar <jar file name>
+```
+
+## Configuration
+This project contains a configuration file which contains JWT token configuration e.g.
+
+```
+# Secret to be used in JWT signature
+jwt.secret=javainuse
+
+# Resource to generate JWT token
+jwt.get.token.uri=/authenticate
+```
+
+
+
+
+
+
+
+
 https://explore.skillbuilder.aws/learn/course/external/view/elearning/134/aws-cloud-practitioner-essentials?sc_ichannel=ha&sc_icampaign=evergreen_ribbon_testing_cloud_practitioner_training_lm&trk=ha_awssm-9045_tnc
 https://medium.com/hackernoon/delivery-pipelines-as-enabler-for-a-devops-culture-ebc45963f703
 
