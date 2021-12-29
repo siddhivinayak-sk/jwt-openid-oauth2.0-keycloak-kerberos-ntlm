@@ -20,6 +20,7 @@ This project is used to demonstrate the OpenID Connect based Authentication with
 - Nodejs
 - Angular
 - Keycloak Infrastructure & OAuth 2.0
+- Zuul
 
 ## Build
 Maven has been used as build tool for this project.
