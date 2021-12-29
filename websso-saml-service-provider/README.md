@@ -29,6 +29,14 @@ java -jar <jar file name>
 
 ## Configuration
 
+Create private key to expose SP on SSL:
+```
+src/main/resources/saml/keystore.jks
+```
+
+Also add the idP certificate in keystore so that SAML token will be validated.
+
+application.yaml Configuartion
 ```
 application:
   # define relay state to redirect the user to configured application once SAML token validated, multiple relay state can be configured with redirection target
