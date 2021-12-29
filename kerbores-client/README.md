@@ -48,8 +48,10 @@ Below need to be configured:
 ```
 # Define the client principal
 app.user-principal=client/localhost
+
 # Define the path of keytab file
 app.keytab-location=example.keytab
+
 # Provide path of protected endpoint which need to be called
 app.access-url=http://localhost:81/endpoint
 ```
