@@ -112,7 +112,7 @@ icacls .\<pemfile>.pem /grant:r "%username%":"(R)"
 Run below command to connect with Ubuntu machine:
 ```
 ssh -i "<pemfile>" <user>@<host or ip of ubuntu machine>
-``
+```
 
 
 ## Install softwares on Ubuntu machine
