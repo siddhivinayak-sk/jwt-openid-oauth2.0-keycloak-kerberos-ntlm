@@ -19,7 +19,7 @@
 		<java.version>1.8</java.version>
 		<jacoco.version>0.8.5</jacoco.version>
 		<sonar.sources>src/main/java</sonar.sources>
-		<sonar.host.url>http://mysonar:9000/</sonar.host.url>
+		<sonar.host.url>http://www.mysonar.com:9000/</sonar.host.url>
 		<sonar.tests>src/test/java</sonar.tests>
 		<sonar.login>admin</sonar.login>
 		<sonar.password>root</sonar.password>
