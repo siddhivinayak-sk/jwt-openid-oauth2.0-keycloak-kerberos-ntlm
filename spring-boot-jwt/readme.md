@@ -102,10 +102,18 @@ B. Declarative Pipeline
 The Declarative pipeline is comparatively new way and good for modular pipeline steps. So we will be using declarative pipeline.
 
 ### Setup Jenkins Agent
+Jenkins is most popular and widely used open-source automation tool which helps in setup CI and CD pipeline. It has wide range of support of build tools, platforms, deployment platform etc. It provides hundreds of plugins which enriches its capabilities. It also supports Cloud based deployments.
+To install, please refer the article: https://siddhivinayak-sk.medium.com/build-your-ci-cd-pipeline-with-jenkins-2dc082162f86
+
 
 ### Setup SonarQube
+SonarQube is a tool which is used for static and dynamic code analysis to analyze the project source to detect security vulnerabilities, performance suggestion, code smell, code bugs etc.
+To install, please refer the article: https://siddhivinayak-sk.medium.com/static-dynamic-code-analysis-with-sonarqube-af689124dab0
+
 
 ### Setup Nexus
+Nexus Repository Manager OSS is most popular open-source deliverable repository to publish artifacts. It has been used into the pipeline.
+To install, please refer the article: https://siddhivinayak-sk.medium.com/manage-libraries-artifacts-and-deliverables-with-nexus-repository-manager-oss-2252ec3a35ff
 
 
 ### In case using SSH to connect Ubuntu from Windows machine with PEM file
