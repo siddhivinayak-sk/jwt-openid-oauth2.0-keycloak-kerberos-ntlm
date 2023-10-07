@@ -1,0 +1,486 @@
+{
+	"info": {
+		"_postman_id": "732603b4-df33-4ef3-8600-d2be7d63b0e7",
+		"name": "Keycloak",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "726701"
+	},
+	"item": [
+		{
+			"name": "Standard flow with auth code",
+			"item": [
+				{
+					"name": "AuthRequest",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://keycloak.acg-digistore.com/realms/skent/protocol/openid-connect/auth?client_id=app1&response_mode=fragment&response_type=code&scope=openid&redirect_uri=https://www.google.com",
+							"protocol": "http",
+							"host": [
+								"keycloak",
+								"acg-digistore",
+								"com"
+							],
+							"path": [
+								"realms",
+								"skent",
+								"protocol",
+								"openid-connect",
+								"auth"
+							],
+							"query": [
+								{
+									"key": "client_id",
+									"value": "app1"
+								},
+								{
+									"key": "response_mode",
+									"value": "fragment"
+								},
+								{
+									"key": "response_type",
+									"value": "code"
+								},
+								{
+									"key": "scope",
+									"value": "openid"
+								},
+								{
+									"key": "redirect_uri",
+									"value": "https://www.google.com"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AuthCodeGrant",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "client_id",
+									"value": "app1",
+									"type": "text"
+								},
+								{
+									"key": "redirect_uri",
+									"value": "https://www.google.com",
+									"type": "text"
+								},
+								{
+									"key": "grant_type",
+									"value": "authorization_code",
+									"type": "text"
+								},
+								{
+									"key": "code",
+									"value": "452795fc-3987-4388-b17e-464884fae7d0.dfb68dd2-2804-40d9-afc4-409bca0203c1.547db448-2012-442c-a24b-1c73effce7c7",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "8WQDHQ9X4mdtzK1Kp5gz833T4dHx0cbH",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://keycloak.acg-digistore.com/realms/skent/protocol/openid-connect/token",
+							"protocol": "http",
+							"host": [
+								"keycloak",
+								"acg-digistore",
+								"com"
+							],
+							"path": [
+								"realms",
+								"skent",
+								"protocol",
+								"openid-connect",
+								"token"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Direct access grants",
+			"item": [
+				{
+					"name": "DirectAccessGrant",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "client_id",
+									"value": "app1",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "8WQDHQ9X4mdtzK1Kp5gz833T4dHx0cbH",
+									"type": "text"
+								},
+								{
+									"key": "grant_type",
+									"value": "password",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "test1",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "test1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://keycloak.acg-digistore.com/realms/skent/protocol/openid-connect/token",
+							"protocol": "http",
+							"host": [
+								"keycloak",
+								"acg-digistore",
+								"com"
+							],
+							"path": [
+								"realms",
+								"skent",
+								"protocol",
+								"openid-connect",
+								"token"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Implicit flow",
+			"item": [
+				{
+					"name": "DirectFlow",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://keycloak.acg-digistore.com/realms/skent/protocol/openid-connect/auth?client_id=app1&response_mode=fragment&response_type=token&scope=openid&redirect_uri=https://www.google.com",
+							"protocol": "http",
+							"host": [
+								"keycloak",
+								"acg-digistore",
+								"com"
+							],
+							"path": [
+								"realms",
+								"skent",
+								"protocol",
+								"openid-connect",
+								"auth"
+							],
+							"query": [
+								{
+									"key": "client_id",
+									"value": "app1"
+								},
+								{
+									"key": "response_mode",
+									"value": "fragment"
+								},
+								{
+									"key": "response_type",
+									"value": "token"
+								},
+								{
+									"key": "scope",
+									"value": "openid"
+								},
+								{
+									"key": "redirect_uri",
+									"value": "https://www.google.com"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Service accounts roles",
+			"item": [
+				{
+					"name": "ClientCredentialGrant",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "client_id",
+									"value": "app1",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "8WQDHQ9X4mdtzK1Kp5gz833T4dHx0cbH",
+									"type": "text"
+								},
+								{
+									"key": "grant_type",
+									"value": "client_credentials",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://keycloak.acg-digistore.com/realms/skent/protocol/openid-connect/token",
+							"protocol": "http",
+							"host": [
+								"keycloak",
+								"acg-digistore",
+								"com"
+							],
+							"path": [
+								"realms",
+								"skent",
+								"protocol",
+								"openid-connect",
+								"token"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "OAuth 2.0 Device Authorization Grant",
+			"item": [
+				{
+					"name": "DeviceCodeGrantCodeReq",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "client_id",
+									"value": "app1",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "8WQDHQ9X4mdtzK1Kp5gz833T4dHx0cbH",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://keycloak.acg-digistore.com/realms/skent/protocol/openid-connect/auth/device",
+							"protocol": "http",
+							"host": [
+								"keycloak",
+								"acg-digistore",
+								"com"
+							],
+							"path": [
+								"realms",
+								"skent",
+								"protocol",
+								"openid-connect",
+								"auth",
+								"device"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeviceCodeTokenReq",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "client_id",
+									"value": "app1",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "8WQDHQ9X4mdtzK1Kp5gz833T4dHx0cbH",
+									"type": "text"
+								},
+								{
+									"key": "grant_type",
+									"value": "urn:ietf:params:oauth:grant-type:device_code",
+									"type": "text"
+								},
+								{
+									"key": "device_code",
+									"value": "iNBSlPUw4CCxSiaS6G0hoTbgsVYVMzxQTuoMLIANv2Y",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://keycloak.acg-digistore.com/realms/skent/protocol/openid-connect/token",
+							"protocol": "http",
+							"host": [
+								"keycloak",
+								"acg-digistore",
+								"com"
+							],
+							"path": [
+								"realms",
+								"skent",
+								"protocol",
+								"openid-connect",
+								"token"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "OIDC CIBA Grant",
+			"item": [
+				{
+					"name": "CIBA Auth Req",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "client_id",
+									"value": "app1",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "8WQDHQ9X4mdtzK1Kp5gz833T4dHx0cbH",
+									"type": "text"
+								},
+								{
+									"key": "scope",
+									"value": "openid",
+									"type": "text"
+								},
+								{
+									"key": "login_hint",
+									"value": "test1",
+									"type": "text"
+								},
+								{
+									"key": "binding_message",
+									"value": "binding_message",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://keycloak.acg-digistore.com/realms/skent/protocol/openid-connect/ext/ciba/auth",
+							"protocol": "http",
+							"host": [
+								"keycloak",
+								"acg-digistore",
+								"com"
+							],
+							"path": [
+								"realms",
+								"skent",
+								"protocol",
+								"openid-connect",
+								"ext",
+								"ciba",
+								"auth"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PollTokenReq",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "client_id",
+									"value": "app1",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "8WQDHQ9X4mdtzK1Kp5gz833T4dHx0cbH",
+									"type": "text"
+								},
+								{
+									"key": "grant_type",
+									"value": "urn:openid:params:grant-type:ciba",
+									"type": "text"
+								},
+								{
+									"key": "auth_req_id",
+									"value": "eyJhbGciOiJkaXIiLCJlbmMiOiJBMTI4Q0JDLUhTMjU2In0..KUD8tZIx9NLe1xYoChw70A.T0rMStjq4LmSAFw1vsNzL0YCYQ0p4xu4matnyS4ree9HhNsO78LNLKEWsCFWQ9lzDW5edf3jzsP7OXcSojwjKL9u1rsbkDcd5xiKOFb_nvJXe6RtF3XDAFb9LVH4WtlwC-VZj0h3wNgbxCN3WEJZK3r7QxodsIHFuFhw44oHltLRkwxUNLNhWfzbe1CDrP4NjTAFVz64l8pzPHCdpDaOrjBX0T830rDR_YHcfIF-YYV_VdpynN_C-2KtPf0E_4oE5V_4Y2gl_XN33XMs1hlai9_aVGBdqu3pMj3Kyz8bhmQV776pJvz5pKomcEEw1WcUZlsJ3TmxW8lq2ygzEHhauoX2OF6397VNMqpDWHEbNR3a7Bk9EeKzj3kh3DneGF4UBWbyN3austhzn5EXzjkK54dWBC3ymd5jo75vUcgZAbZ9PzxvKUq0Tb1M90NsM2BrleDkCMsJOHdDlhA8y3wNdHvGcJANkr-fT7eWQm6Mvz2zuhUPi7Jy3PE50jmZIpFFPdHuScU-rqxta_-3mghtNO2VPHVRQm6aMsB1cvWvZZzGL2apiTbvhFerrYSEB2GB_n1BG4OZJEkKveB1v-LCFu8GrzQdWshjXnmEeLOb3a0o5uORcJuuUO1hdL5WIs9NLa9yjJydD0OFHXfmoAj5DhS5isEPV7f356uniPyIM7fNcJAfq0ASRn__cCLrbGpQ9FYTn1Na-qIZ9uDObGueraj1yoCC744PftUFDPEq4sDESliSmcBB9XTSDMq4zDQ1RnPZBsdTXOwIXC2cc1mBOWIccCblpnMmDETcuOACHAwZYD9U1p7FyEGI2BE4oEpFyo1T9kpGAjkntgslewahosUfKlrryOmDyQ4jP7oCev4.HTbTNTpTZzRHekpg3_Hikw",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://keycloak.acg-digistore.com/realms/skent/protocol/openid-connect/token",
+							"protocol": "http",
+							"host": [
+								"keycloak",
+								"acg-digistore",
+								"com"
+							],
+							"path": [
+								"realms",
+								"skent",
+								"protocol",
+								"openid-connect",
+								"token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CallbakReq",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
