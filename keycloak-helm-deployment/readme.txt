@@ -83,6 +83,7 @@ Manual way (if keycloak running conventionally):
 
 Add "KEYCLOAK_EXTRA_ARGS" with values:
 --spi-ciba-auth-channel-ciba-http-auth-channel-http-authentication-channel-uri=http://host.docker.internal:3001/request
+--spi-ciba-auth-channel-ciba-http-auth-channel-http-authentication-channel-uri=http://ciba-svc/request
 With helm bundle, extraStartupArgs can be set with values.yml
 
 

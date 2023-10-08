@@ -2,7 +2,7 @@
 apiVersion: networking.istio.io/v1alpha3
 kind: Gateway
 metadata:
-  name: ingress-gateway
+  name: ingress-gateway-keycloak
   namespace: istio-ingress
 spec:
   selector:
@@ -35,7 +35,7 @@ spec:
   hosts:
   - keycloak.acg-digistore.com
   gateways:
-  - istio-ingress/ingress-gateway
+  - istio-ingress/ingress-gateway-keycloak
   - mesh
   http:
   - match:
