@@ -2,11 +2,28 @@ https://github.com/bitnami/charts/tree/main/bitnami/keycloak/#installing-the-cha
 
 h install keyclaok-x oci://registry-1.docker.io/bitnamicharts/keycloak
 h install keyclaok-x --set auth.adminPassword=secretpassword oci://registry-1.docker.io/bitnamicharts/keycloak
-
 h uninstall keyclaok-x
 
 Url: http://keycloak.acg-digistore.com
 user/secretpassword
+
+or
+
+Url: https://keycloak.acg-digistore.com
+user/secretpassword
+
+It may create issue while exposing Keycloak on HTTP/S via Bitnami Helm & Istio, you can try below workarounds base on bundle version:
+a. Set env variables:
+PROXY_ADDRESS_FORWARDING=true
+KEYCLOAK_PROXY_ADDRESS_FORWARDING=true
+KEYCLOAK_FRONTEND_URL=https://keycloak.acg-digistore.com
+KEYCLOAK_EXTRA_ARGS="-Dkeycloak.frontendUrl=https://keycloak.acg-digistore.com"
+KC_PROXY=passthrough
+KEYCLOAK_PROXY=passthrough
+b. manually set frontend url:
+Keycloak Web Console -> Realm Setting -> Frontend URL = https://keycloak.acg-digistore.com/
+and set allowed origin is * in client's setting
+
 
 A. Create a Realm skent
 B. Create a client in skent realm by enabling all auth flows
