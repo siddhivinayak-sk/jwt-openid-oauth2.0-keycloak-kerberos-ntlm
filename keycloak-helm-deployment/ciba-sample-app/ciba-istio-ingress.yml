@@ -1,0 +1,67 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: ingress-gateway-ciba
+  namespace: istio-ingress
+spec:
+  selector:
+    app: istio-ingress
+  servers:
+  - port:
+      number: 443
+      name: https-443
+      protocol: HTTPS
+    hosts:
+    - ciba.acg-digistore.com
+    tls:
+      mode: SIMPLE
+      credentialName: istio-ingress-crt
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+    - ciba.acg-digistore.com
+#    tls:
+#      httpsRedirect: true
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: ciba-acg-digistore-com-vs
+  namespace: default
+spec:
+  hosts:
+  - ciba.acg-digistore.com
+  gateways:
+  - istio-ingress/ingress-gateway-ciba
+  - mesh
+  http:
+  - match:
+    - uri:
+        prefix: /
+    route:
+    - destination:
+        port:
+          number: 80
+        host: ciba-svc.default.svc.cluster.local
+        subset: v1
+      weight: 100
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: ciba-acg-digistore-com-dr
+  namespace: default
+spec:
+  host: ciba-svc.default.svc.cluster.local
+  trafficPolicy:
+    loadBalancer:
+      simple: RANDOM
+  subsets:
+  - name: v1
+    labels:
+      app: ciba
+    trafficPolicy:
+      loadBalancer:
+        simple: ROUND_ROBIN

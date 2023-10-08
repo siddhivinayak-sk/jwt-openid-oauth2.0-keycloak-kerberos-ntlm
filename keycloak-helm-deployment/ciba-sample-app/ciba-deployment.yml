@@ -1,0 +1,46 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: ciba-svc
+  name: ciba-svc
+spec:
+  ports:
+  - protocol: TCP
+    name: "80"
+    port: 80
+    targetPort: 3001
+  selector:
+    app: ciba
+  type: ClusterIP
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: ciba
+  name: ciba
+spec:
+  selector:
+    matchLabels:
+      app: ciba
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: ciba
+    spec:
+      containers:
+      - name: ciba
+        image: siddhivinayaksk/ciba-sample-app:latest
+        env:
+        - name: CALLBACK_HOST
+          value: keyclaok-x-keycloak
+        - name: CALLBACK_HOST_HEADER
+          value: keycloak.acg-digistore.com
+        - name: DEBUG
+          value: "true"
+        imagePullPolicy: "Always"
+        ports:
+        - containerPort: 3001
+      restartPolicy: Always
