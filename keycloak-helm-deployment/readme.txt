@@ -25,6 +25,16 @@ Keycloak Web Console -> Realm Setting -> Frontend URL = https://keycloak.acg-dig
 and set allowed origin is * in client's setting
 
 
+if only k8 ingress:
+Install Nginx: helm install my-release oci://ghcr.io/nginxinc/charts/nginx-ingress --version 1.1.3
+  PROXY_ADDRESS_FORWARDING: "true"
+  KEYCLOAK_PROXY_ADDRESS_FORWARDING: "true"
+  KEYCLOAK_FRONTEND_URL: "http://www.mykeycloak.com"
+  KEYCLOAK_EXTRA_ARGS: "-Dkeycloak.frontendUrl=http://www.mykeycloak.com"
+  KC_PROXY: "passthrough"
+
+
+
 A. Create a Realm skent
 B. Create a client in skent realm by enabling all auth flows
 c. Create a user named test1
