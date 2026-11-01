@@ -69,3 +69,7 @@ This project contains one endpoint which internally connect to endpoint availabl
 Application Server with Waffle - https://github.com/siddhivinayak-sk/jwt-openid-oauth2.0-keycloak-kerberos-ntlm/tree/main/spring-waffle
 
 If one wants to implement NTLMv2 based authentication mechanism, this can help. This project is a Web Project developed using Spring Boot and Waffle. Whenever, anyone opens browser and open any page, it goes to backend, and Waffle parse and identifies the user.
+
+## Support This Project
+
+If you find this project useful, consider supporting my open-source work by [buying me a coffee](https://buymeacoffee.com/siddhivinayak.sk). Your support is greatly appreciated! ☕
